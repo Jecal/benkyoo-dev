@@ -12,11 +12,9 @@ import {
     Button,
 } from '@chakra-ui/react';
 
-// router
-import { useNavigate } from 'react-router-dom';
-
-// auth0
-import { useAuth0 } from '@auth0/auth0-react';
+// firebase
+import { auth } from '../firebaseConfig';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function LandingPage() {
     return (
@@ -30,7 +28,7 @@ function LandingPage() {
 }
 
 const Landing = () => {
-    const { isLoading, error } = useAuth0();
+    const user = useAuthState(auth);
 
     return (
         <>
@@ -52,13 +50,10 @@ const Landing = () => {
                             make them or take them, learn your way
                         </Text>
                     </VStack>
-                    {error && <Text>Authentication Error</Text>}
-                    {!error && isLoading && <Text>Loading...</Text>}
-                    {!error && !isLoading && (
-                        <>
-                            <SignInButton />
-                        </>
-                    )}
+                    <>
+                        {!user}
+                        <SignInButton />
+                    </>
                 </VStack>
             </Box>
         </>

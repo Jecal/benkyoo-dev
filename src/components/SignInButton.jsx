@@ -1,21 +1,28 @@
-// auth0
-import { useAuth0 } from '@auth0/auth0-react';
+// firebase
+import { auth, provider, signInWithPopup } from '../firebaseConfig';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 // chakra
 import { Button } from '@chakra-ui/react';
 
 const SignInButton = () => {
-    const { loginWithRedirect, isAuthenticated } = useAuth0();
+    const [user] = useAuthState(auth);
+
+    const handleSignIn = () => {
+        signInWithPopup(auth, provider).catch(error => {
+            console.error('error during sign in: ', error);
+        });
+    };
 
     return (
-        !isAuthenticated && (
+        !user && (
             <>
-                <Button colorScheme='purple' onClick={() => loginWithRedirect()}>
+                <Button colorScheme='purple' onClick={handleSignIn}>
                     sign in
                 </Button>
             </>
         )
-    )
-}
+    );
+};
 
 export default SignInButton

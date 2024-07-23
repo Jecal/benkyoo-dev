@@ -1,20 +1,16 @@
 // auth0
-import { useAuth0 } from '@auth0/auth0-react';
+import { auth } from '../firebaseConfig';
 
 // chakra
 import { MenuItem } from '@chakra-ui/react';
 
 const SignOutButton = () => {
-    const { logout, isAuthenticated } = useAuth0();
-
-    return (
-        isAuthenticated && (
-            <>
-                <MenuItem onClick={() => logout()}>
-                    sign out
-                </MenuItem>
-            </>
-        )
+    return auth.currentUser && (
+        <>
+            <MenuItem onClick={() => auth.signOut()}>
+                sign out
+            </MenuItem>
+        </>
     )
 }
 

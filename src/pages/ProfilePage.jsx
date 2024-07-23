@@ -13,8 +13,9 @@ import {
     VStack, Stack
 } from '@chakra-ui/react'
 
-// auth
-import { useAuth0 } from '@auth0/auth0-react';
+// firebase
+import { auth } from '../firebaseConfig';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function ProfilePage() {
     return (
@@ -51,10 +52,10 @@ const PageContent = () => {
 }
 
 const ProfilePopup = () => {
-    const { user, isAuthenticated } = useAuth0();
+    const [user] = useAuthState(auth);
 
     return (
-        isAuthenticated && (
+        user && (
             <>
                 <GridItem area={'pf'}>
                     <Box
@@ -65,11 +66,8 @@ const ProfilePopup = () => {
                         alignContent={'center'}
                     >
                     <Flex direction={'row'} justify={'space-between'}>
-                        <Image src={user.picture} borderRadius='full' h={'8vh'} />
-                        <VStack align={'start'}>
-                            <Heading size={'xl'}>{user.name}</Heading>
-                            <Text fontSize={'sm'}>{user.email}</Text>
-                        </VStack>
+                        <Image src={user.photoURL} borderRadius='full' h={'8vh'} />
+                        <Heading size={'xl'}>{user.displayName}</Heading>
                     </Flex>
                     </Box>
                 </GridItem>
@@ -88,7 +86,7 @@ const Sidebar = () => {
                     h={'62vh'}
                     p={4}
                 >
-                    <Heading>sidebar to be implemented</Heading>
+                    <Heading></Heading>
                 </Box>
             </GridItem>
         </>
@@ -105,7 +103,7 @@ const MainProfile = () => {
                     h={'78vh'}
                     p={4}
                 >
-                    <Heading>profile</Heading>
+                    <Heading></Heading>
                 </Box>
             </GridItem>
         </>

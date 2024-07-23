@@ -1,5 +1,6 @@
-// auth0
-import { useAuth0 } from '@auth0/auth0-react';
+// firebase
+import { auth } from '../firebaseConfig';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 // chakra
 import { 
@@ -18,21 +19,21 @@ import { useNavigate } from 'react-router-dom';
 import SignOutButton from './SignOutButton';
 
 const Profile = () => {
-    const { user, isAuthenticated } = useAuth0();
     const navigate = useNavigate();
+    const [user] = useAuthState(auth);
 
     const handleProfile = () => {
         navigate('/profile')
     }
 
     return (
-        isAuthenticated && (
+        user && (
             <>
                 <Menu>
                     <MenuButton
                         as={Avatar}
                         size='sm'
-                        src={user.picture}
+                        src={user.photoURL}
                     />
                     <MenuList>
                         <MenuItem onClick={handleProfile}>

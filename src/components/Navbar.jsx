@@ -14,8 +14,9 @@ import { SunIcon, MoonIcon } from '@chakra-ui/icons'
 // router
 import { useNavigate } from 'react-router-dom';
 
-// auth0
-import { useAuth0 } from '@auth0/auth0-react';
+// firebase
+import { auth } from '../firebaseConfig';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 // built
 import logo from '/logo.png';
@@ -25,10 +26,14 @@ import Profile from './Profile';
 function Navbar() {
     const navigate = useNavigate();
     const { colorMode, toggleColorMode } = useColorMode();
-    const { isLoading, error } = useAuth0();
+    const user = useAuthState(auth);
 
     const logoClick = () => {
         navigate('/')
+    };
+
+    const notesClick = () => {
+        navigate('/notes')
     };
 
     return (
@@ -44,7 +49,7 @@ function Navbar() {
                         <Image src={logo} h='3vh'/> 
                     </Container>   
                     <HStack spacing={'2vw'}>
-                        <Link px={'2vw'} _hover={{ textDecoration: 'none' }}>
+                        <Link px={'2vw'} _hover={{ textDecoration: 'none' }} onClick={notesClick}>
                             notes
                         </Link>
                         <Link px={'2vw'} _hover={{ textDecoration: 'none' }}>
@@ -62,14 +67,10 @@ function Navbar() {
                                 variant={'ghost'}
                                 aria-label={'toggle color mode'}
                             />
-                            {error && <Text>Authentication Error</Text>}
-                            {!error && isLoading && <Text>Loading...</Text>}
-                            {!error && !isLoading && (
                                 <>
                                     <SignInButton />
                                     <Profile />
                                 </>
-                            )}
                         </HStack>
                     </Container>
                 </HStack>
