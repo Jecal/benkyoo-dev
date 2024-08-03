@@ -137,6 +137,12 @@ function Navbar() {
                                         </DrawerHeader>
                                         <DrawerBody>
                                             <HStack p={4}>
+                                                <IconButton 
+                                                    icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                                                    onClick={toggleColorMode}
+                                                    variant={'ghost'}
+                                                    aria-label={'toggle color mode'}
+                                                />
                                                 <SignInButton />
                                                 <Profile />
                                                 {user && <Text>{user.displayName}</Text>}

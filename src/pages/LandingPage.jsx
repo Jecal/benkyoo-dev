@@ -61,10 +61,10 @@ const Landing = () => {
                     <VStack spacing={'2vh'} centerContent>
                         <Image src={logo} h={'7vh'}/>
                         <VStack spacing={'1vh'}>
-                            <Heading as={'h1'} size={'xl'}>
+                            <Heading as={'h1'} size={'sm'}>
                                 a platform for note-sharing
                             </Heading>
-                            <Text as={'i'} size={'l'}>
+                            <Text as={'i'} size={'sm'}>
                                 make them or take them, learn your way
                             </Text>
                             <>
