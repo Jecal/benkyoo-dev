@@ -36,8 +36,7 @@ const Landing = () => {
                 display={'block'}
                 borderWidth={'1px'}
                 borderRadius={'lg'}
-                w={'80vw'}
-                h={'80vh'}
+                w={'90vw'}
                 alignContent={'center'}
             >
                 <Show above='800px'>
@@ -58,13 +57,13 @@ const Landing = () => {
                 </VStack>
                 </Show>
                 <Show below='800px'>
-                    <VStack spacing={'2vh'} centerContent>
+                    <VStack spacing={'3'} p={6} centerContent>
                         <Image src={logo} h={'7vh'}/>
-                        <VStack spacing={'1vh'}>
+                        <VStack spacing={2}>
                             <Heading as={'h1'} size={'sm'}>
                                 a platform for note-sharing
                             </Heading>
-                            <Text as={'i'} size={'sm'}>
+                            <Text as={'i'} fontSize={'sm'}>
                                 make them or take them, learn your way
                             </Text>
                             <>
