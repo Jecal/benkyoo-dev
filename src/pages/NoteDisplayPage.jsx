@@ -60,7 +60,7 @@ const GridLayout = () => {
                                         "no no"
                                         "no no"
                                         "no no"`}
-                        gridTemplateRows={'14vh 14vh 14vh 14vh 14vh'}
+                        gridTemplateRows={'16vh 16vh 13vh 13vh 13vh'}
                         gridTemplateColumns={'40vw 40vw'}
                         gap={'2vh'}
                     >
@@ -128,7 +128,7 @@ const PDFdisplay = () => {
                     <Box
                         borderWidth={'1px'}
                         borderRadius={'lg'}
-                        h={'46vh'}
+                        h={'43vh'}
                         alignItems={'center'}
                         p={4}
                     >
@@ -244,7 +244,7 @@ const Sidebar = () => {
                     <Box
                         borderWidth={'1px'}
                         borderRadius={'lg'}
-                        h={'30vh'}
+                        h={'34vh'}
                         p={4}
                     >
                         <VStack as={'form'} spacing={4}>
