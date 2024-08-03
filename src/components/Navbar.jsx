@@ -1,15 +1,29 @@
+import React from 'react';
+
 // chakra
 import {
     Box,
     HStack,
+    VStack,
     Container,
     Image,
     Link,
     useColorMode,
     IconButton,
-    Text
+    Show,
+    Hide,
+    Flex,
+    useDisclosure,
+    Drawer,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton,
+    Text,
+    DrawerHeader,
+    DrawerBody,
+    Divider
 } from '@chakra-ui/react';
-import { SunIcon, MoonIcon } from '@chakra-ui/icons'
+import { SunIcon, MoonIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 
 // router
 import { useNavigate } from 'react-router-dom';
@@ -24,9 +38,10 @@ import SignInButton from './SignInButton';
 import Profile from './Profile';
 
 function Navbar() {
+    const [user] = useAuthState(auth);
+    
     const navigate = useNavigate();
     const { colorMode, toggleColorMode } = useColorMode();
-    const user = useAuthState(auth);
 
     const logoClick = () => {
         navigate('/')
@@ -36,18 +51,24 @@ function Navbar() {
         navigate('/notes')
     };
 
+    // smaller navbar
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const btnRef = React.useRef()
+
     return (
         <>
-            <Box
+                <Hide below={'800px'}>
+                <Box
                 display={'inline-block'}
                 mt={'3vh'}
                 borderWidth={'1px'}
                 borderRadius={'lg'}
+                width={['80%']}
             >
-                <HStack direction='row' spacing={'6vw'} h='7vh'>
+                <HStack direction='row' spacing={'6vh'} h='7vh'>
                     <Container onClick={logoClick} cursor='pointer' px={'1vw'}>
                         <Image src={logo} h='3vh'/> 
-                    </Container>   
+                    </Container> 
                     <HStack spacing={'2vw'}>
                         <Link px={'2vw'} _hover={{ textDecoration: 'none' }} onClick={notesClick}>
                             notes
@@ -74,7 +95,71 @@ function Navbar() {
                         </HStack>
                     </Container>
                 </HStack>
-            </Box>
+                </Box>
+                </Hide>
+
+                <Show below={'800px'}>
+                    <Box
+                        display={'inline-block'}
+                        mt={'3vh'}
+                        borderWidth={'1px'}
+                        borderRadius={'lg'}
+                        width={'80%'}
+                        h={'7vh'}
+                    >
+                        <Flex 
+                            direction={'row'} 
+                            alignItems={'center'} 
+                            justifyContent={'space-between'}
+                            p={3}
+                        >
+                            <Box onClick={logoClick} cursor='pointer'>
+                                <Image src={logo} h='3vh'/> 
+                            </Box>
+                            <Box>
+                                <IconButton 
+                                    ref={btnRef} 
+                                    onClick={onOpen}
+                                    icon={<HamburgerIcon />}
+                                />
+                            </Box>
+                                <Drawer
+                                    isOpen={isOpen}
+                                    placement='right'
+                                    onClose={onClose}
+                                    finalFocusRef={btnRef}
+                                >
+                                    <DrawerOverlay />
+                                    <DrawerContent>
+                                        <DrawerCloseButton />
+                                        <DrawerHeader onClick={logoClick} cursor='pointer'>
+                                            <Image src={logo} h='3vh'/> 
+                                        </DrawerHeader>
+                                        <DrawerBody>
+                                            <HStack p={4}>
+                                                <SignInButton />
+                                                <Profile />
+                                                {user && <Text>{user.displayName}</Text>}
+                                            </HStack>
+                                            <Divider />
+                                            <VStack>
+                                            <Link px={'2vw'} _hover={{ textDecoration: 'none' }} onClick={notesClick} alignSelf={'start'}>
+                                                <Text fontSize={'3xl'}>notes</Text>
+                                            </Link>
+                                            <Link px={'2vw'} _hover={{ textDecoration: 'none' }} alignSelf={'start'}>
+                                                <Text fontSize={'3xl'}>dash</Text>
+                                            </Link>
+                                            <Link px={'2vw'} _hover={{ textDecoration: 'none' }} alignSelf={'start'}>
+                                                <Text fontSize={'3xl'}>community</Text>
+                                            </Link>
+                                            </VStack>
+                                        </DrawerBody>
+                                    </DrawerContent>
+                                </Drawer>
+                        </Flex>
+                    </Box>
+                </Show>
+
         </>
     )
 }

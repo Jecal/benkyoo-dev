@@ -21,7 +21,8 @@ import {
     Textarea,
     Button,
     Text, Heading,
-    Link
+    Link,
+    Show
 } from '@chakra-ui/react'
 
 function NoteDisplayPage() {
@@ -39,6 +40,7 @@ const GridLayout = () => {
     return (
         <>
             <Container mt={'2vh'} centerContent>
+                <Show above={'800px'}>
                 <Grid
                 templateAreas={`"sb no no no no"
                                 "sb no no no no"
@@ -50,6 +52,22 @@ const GridLayout = () => {
                     <Sidebar />
                     <PDFdisplay />
                 </Grid>
+                </Show>
+                <Show below={'800px'}>
+                    <Grid
+                        templateAreas={`"sb sb"
+                                        "sb sb"
+                                        "no no"
+                                        "no no"
+                                        "no no"`}
+                        gridTemplateRows={'14vh 14vh 14vh 14vh 14vh'}
+                        gridTemplateColumns={'40vw 40vw'}
+                        gap={'2vh'}
+                    >
+                        <Sidebar />
+                        <PDFdisplay />
+                    </Grid>
+                </Show>
             </Container>
         </>
     )
@@ -72,6 +90,7 @@ const PDFdisplay = () => {
 
     return (
         <>
+            <Show above='800px'>
             <GridItem area={'no'}>
                 <Box
                     borderWidth={'1px'}
@@ -103,6 +122,41 @@ const PDFdisplay = () => {
                     </div>
                 </Box>
             </GridItem>
+            </Show>
+            <Show below={'800px'}>
+                <GridItem area={'no'}>
+                    <Box
+                        borderWidth={'1px'}
+                        borderRadius={'lg'}
+                        h={'46vh'}
+                        alignItems={'center'}
+                        p={4}
+                    >
+                        <div>
+                        {posts.map((post, index) => (
+                            <>
+                                <Box
+                                    borderWidth={'1px'}
+                                    borderRadius={'md'}
+                                    p={2}
+                                    my={2}
+                                    key={index}
+                                >
+                                    <Heading size={'md'}>{post.title}</Heading>
+                                    <Text fontSize={'sm'}>{post.description}</Text>
+                                    <Text fontSize={'md'}> by {post.author}</Text>
+                                    <Button size={'sm'}>
+                                        <Link href={post.fileURL}>
+                                            view
+                                        </Link>
+                                    </Button>
+                                </Box>
+                            </>
+                        ))}
+                        </div>
+                    </Box>
+                </GridItem>
+            </Show>
         </>
     );
 };
@@ -155,6 +209,7 @@ const Sidebar = () => {
 
     return (
         <>
+            <Show above='800px'>
             <GridItem area={'sb'}>
                 <Box
                     borderWidth={'1px'}
@@ -168,6 +223,7 @@ const Sidebar = () => {
                     >
                         <Input type={'file'} onChange={(e) => setFile(e.target.files[0])} />
                         <Input
+                            placeholder='enter a note title'
                             value={(title)}
                             onChange={(e) => setTitle(e.target.value)}
                         >
@@ -182,6 +238,34 @@ const Sidebar = () => {
                         </VStack>
                 </Box>
             </GridItem>
+            </Show>
+            <Show below={'800px'}>
+                <GridItem area={'sb'}>
+                    <Box
+                        borderWidth={'1px'}
+                        borderRadius={'lg'}
+                        h={'30vh'}
+                        p={4}
+                    >
+                        <VStack as={'form'} spacing={4}>
+                            <Box centerContent>
+                                <Input type={'file'} onChange={(e) => setFile(e.target.files[0])}/>
+                            </Box>
+                            <Input 
+                                placeholder='enter a note title'
+                                value={(title)}
+                                onChange={(e) => setTitle(e.target.value)}
+                            />
+                            <Textarea 
+                                placeholder='make a description for your notes'
+                                value={(description)}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                            <Button onClick={handleUpload} isLoading={loading}>{!URL && <Text>upload</Text>}{URL && <Text>successfully uploaded!</Text>}</Button>
+                        </VStack>
+                    </Box>
+                </GridItem>
+            </Show>
         </>
     )
 }

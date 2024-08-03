@@ -9,7 +9,7 @@ import {
     Text,
     VStack,
     Image,
-    Button,
+    Show
 } from '@chakra-ui/react';
 
 // firebase
@@ -40,6 +40,7 @@ const Landing = () => {
                 h={'80vh'}
                 alignContent={'center'}
             >
+                <Show above='800px'>
                 <VStack spacing={'3vh'} centerContent>
                     <Image src={logo} h={'15vh'} />
                     <VStack spacing={'2vh'}>
@@ -55,6 +56,25 @@ const Landing = () => {
                         <SignInButton />
                     </>
                 </VStack>
+                </Show>
+                <Show below='800px'>
+                    <VStack spacing={'2vh'} centerContent>
+                        <Image src={logo} h={'7vh'}/>
+                        <VStack spacing={'1vh'}>
+                            <Heading as={'h1'} size={'xl'}>
+                                a platform for note-sharing
+                            </Heading>
+                            <Text as={'i'} size={'l'}>
+                                make them or take them, learn your way
+                            </Text>
+                            <>
+                                {!user}
+                                <SignInButton />
+                            </>
+                        </VStack>
+                    </VStack>
+                </Show>
+                
             </Box>
         </>
     )
