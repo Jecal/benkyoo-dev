@@ -102,10 +102,9 @@ function Navbar() {
                     <Box
                         display={'inline-block'}
                         mt={'3vh'}
-                        borderWidth={'1px'}
+                        borderWidth={1}
                         borderRadius={'lg'}
-                        width={'80%'}
-                        h={'7vh'}
+                        width={'90vw'}
                     >
                         <Flex 
                             direction={'row'} 

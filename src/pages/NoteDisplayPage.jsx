@@ -54,19 +54,10 @@ const GridLayout = () => {
                 </Grid>
                 </Show>
                 <Show below={'800px'}>
-                    <Grid
-                        templateAreas={`"sb sb"
-                                        "sb sb"
-                                        "no no"
-                                        "no no"
-                                        "no no"`}
-                        gridTemplateRows={'16vh 16vh 13vh 13vh 13vh'}
-                        gridTemplateColumns={'40vw 40vw'}
-                        gap={'2vh'}
-                    >
+                    <VStack spacing={4}>
                         <Sidebar />
                         <PDFdisplay />
-                    </Grid>
+                    </VStack>
                 </Show>
             </Container>
         </>
@@ -124,19 +115,19 @@ const PDFdisplay = () => {
             </GridItem>
             </Show>
             <Show below={'800px'}>
-                <GridItem area={'no'}>
-                    <Box
-                        borderWidth={'1px'}
-                        borderRadius={'lg'}
-                        h={'43vh'}
-                        alignItems={'center'}
-                        p={4}
-                    >
-                        <div>
+                <Box
+                    borderWidth={1}
+                    borderRadius={'lg'}
+                    w={'90vw'}
+                    alignItems={'center'}
+                    p={4}
+                >
+                    <div>
                         {posts.map((post, index) => (
                             <>
                                 <Box
-                                    borderWidth={'1px'}
+                                    display={'block'}
+                                    borderWidth={1}
                                     borderRadius={'md'}
                                     p={2}
                                     my={2}
@@ -153,9 +144,8 @@ const PDFdisplay = () => {
                                 </Box>
                             </>
                         ))}
-                        </div>
-                    </Box>
-                </GridItem>
+                    </div>
+                </Box>
             </Show>
         </>
     );
@@ -240,11 +230,11 @@ const Sidebar = () => {
             </GridItem>
             </Show>
             <Show below={'800px'}>
-                <GridItem area={'sb'}>
                     <Box
-                        borderWidth={'1px'}
+                        borderWidth={1}
                         borderRadius={'lg'}
-                        h={'34vh'}
+                        w={'90vw'}
+                        alignItems={'center'}
                         p={4}
                     >
                         <VStack as={'form'} spacing={4}>
@@ -264,7 +254,6 @@ const Sidebar = () => {
                             <Button onClick={handleUpload} isLoading={loading}>{!URL && <Text>upload</Text>}{URL && <Text>successfully uploaded!</Text>}</Button>
                         </VStack>
                     </Box>
-                </GridItem>
             </Show>
         </>
     )
