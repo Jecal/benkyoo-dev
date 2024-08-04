@@ -1,4 +1,5 @@
 import Navbar from '../components/Navbar';
+import SearchBar from '../components/NoteSearchBar';
 import { useState, useEffect } from 'react';
 
 // firebase
@@ -40,12 +41,13 @@ const GridLayout = () => {
     return (
         <>
             <Container centerContent>
-                <Show above={'800px'}>
+                <Show above={'1000px'}>
                 <Grid
-                templateAreas={`"sb no no no no"
+                templateAreas={`"sb se se se se"
+                                "sb no no no no"
                                 "sb no no no no"
                                 "sb no no no no"`}
-                gridTemplateRows={'25vh 25vh 25vh'}
+                gridTemplateRows={'3vh 24vh 24vh 24vh'}
                 gridTemplateColumns={'15vw 15vw 15vw 15vw 15vw'}
                 gap={'2vh'}
                 >
@@ -53,7 +55,7 @@ const GridLayout = () => {
                     <PDFdisplay />
                 </Grid>
                 </Show>
-                <Show below={'800px'}>
+                <Show below={'1000px'}>
                     <VStack spacing={4}>
                         <Sidebar />
                         <PDFdisplay />
@@ -66,6 +68,7 @@ const GridLayout = () => {
 
 const PDFdisplay = () => {
     const [posts, setPosts] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         const fetchPosts = async() => {
@@ -79,18 +82,30 @@ const PDFdisplay = () => {
         fetchPosts();
     }, []);
 
+    const filteredPosts = posts.filter(
+        (post) =>
+            post.title.toLowerCase().includes(searchQuery) ||
+            post.description.toLowerCase().includes(searchQuery) ||
+            post.author.toLowerCase().includes(searchQuery)
+    );
+
     return (
         <>
-            <Show above='800px'>
+            <Show above='1000px'>
+            <GridItem area={'se'}>
+                <SearchBar onSearch={setSearchQuery}/>
+            </GridItem>
             <GridItem area={'no'}>
                 <Box
                     borderWidth={'1px'}
                     borderRadius={'lg'}
-                    h={'79vh'}
+                    h={'74vh'}
                     p={4}
+                    justifyContent={'center'}
+                    overflowY={'auto'}
                 >
                     <div>
-                        {posts.map((post, index) => (
+                        {filteredPosts.map((post, index) => (
                             <>
                                 <Box
                                     borderWidth={'1px'}
@@ -114,7 +129,7 @@ const PDFdisplay = () => {
                 </Box>
             </GridItem>
             </Show>
-            <Show below={'800px'}>
+            <Show below={'1000px'}>
                 <Box
                     borderWidth={1}
                     borderRadius={'lg'}
@@ -122,8 +137,9 @@ const PDFdisplay = () => {
                     alignItems={'center'}
                     p={4}
                 >
+                    <SearchBar onSearch={setSearchQuery}/>
                     <div>
-                        {posts.map((post, index) => (
+                        {filteredPosts.map((post, index) => (
                             <>
                                 <Box
                                     display={'block'}
@@ -199,7 +215,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <Show above='800px'>
+            <Show above='1000px'>
             <GridItem area={'sb'}>
                 <Box
                     borderWidth={'1px'}
@@ -220,6 +236,7 @@ const Sidebar = () => {
                         </Input>
                         <Textarea
                             h={'md'}
+                            placeholder='enter a note description'
                             value={(description)}
                             onChange={(e) => setDescription(e.target.value)}
                         >
@@ -230,7 +247,7 @@ const Sidebar = () => {
                 </Box>
             </GridItem>
             </Show>
-            <Show below={'800px'}>
+            <Show below={'1000px'}>
                     <Box
                         borderWidth={1}
                         borderRadius={'lg'}
