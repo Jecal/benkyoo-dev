@@ -39,14 +39,14 @@ function NoteDisplayPage() {
 const GridLayout = () => {
     return (
         <>
-            <Container mt={'2vh'} centerContent>
+            <Container centerContent>
                 <Show above={'800px'}>
                 <Grid
                 templateAreas={`"sb no no no no"
                                 "sb no no no no"
                                 "sb no no no no"`}
                 gridTemplateRows={'25vh 25vh 25vh'}
-                gridTemplateColumns={'14vw 14vw 14vw 14vw 14vw'}
+                gridTemplateColumns={'15vw 15vw 15vw 15vw 15vw'}
                 gap={'2vh'}
                 >
                     <Sidebar />
@@ -219,6 +219,7 @@ const Sidebar = () => {
                         >
                         </Input>
                         <Textarea
+                            h={'md'}
                             value={(description)}
                             onChange={(e) => setDescription(e.target.value)}
                         >

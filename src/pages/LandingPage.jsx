@@ -32,49 +32,42 @@ const Landing = () => {
 
     return (
         <>
-            <Box
-                display={'block'}
-                borderWidth={'1px'}
-                borderRadius={'lg'}
-                w={'90vw'}
-                alignContent={'center'}
-            >
-                <Show above='800px'>
-                <VStack spacing={'3vh'} centerContent>
-                    <Image src={logo} h={'15vh'} />
-                    <VStack spacing={'2vh'}>
-                        <Heading as='h1' size='2xl'>
-                            a platform for note-sharing
-                        </Heading>
-                        <Text as={'i'} fontSize='4xl'>
-                            make them or take them, learn your way
-                        </Text>
+            {/* desktop */}
+            <Show above='800px'>
+                <Box
+                    display={'block'}
+                    borderWidth={1}
+                    borderRadius={'lg'}
+                    w={'80vw'}
+                    h={'80vh'}
+                    alignContent={'center'}
+                >
+                    <VStack p={12} spacing={4}>
+                        <Image src={logo} h={'15vw'}/>
+                        <Heading>a platform for note-sharing</Heading>
+                        <Text>make them or take them, learn at your pace</Text>
+                        <>
+                            {!user}
+                            <SignInButton />
+                        </>
                     </VStack>
-                    <>
-                        {!user}
-                        <SignInButton />
-                    </>
-                </VStack>
-                </Show>
-                <Show below='800px'>
-                    <VStack spacing={'3'} p={6} centerContent>
-                        <Image src={logo} h={'7vh'}/>
-                        <VStack spacing={2}>
-                            <Heading as={'h1'} size={'sm'}>
-                                a platform for note-sharing
-                            </Heading>
-                            <Text as={'i'} fontSize={'sm'}>
-                                make them or take them, learn your way
-                            </Text>
-                            <>
-                                {!user}
-                                <SignInButton />
-                            </>
-                        </VStack>
+                </Box>
+            </Show>
+            {/* mobile */}
+            <Show below='800px'>
+                <Box
+                    display={'block'}
+                    borderWidth={1}
+                    borderRadius={'lg'}
+                    w={'90vw'}
+                >
+                    <VStack p={6} spacing={2}>
+                        <Image src={logo} h={'7.5vw'}/>
+                        <Heading as={'h1'} size={'sm'}>a platform for note-sharing</Heading>
+                        <Text as={'i'} fontSize={'sm'}>make them or take them, learn at your pace</Text>
                     </VStack>
-                </Show>
-                
-            </Box>
+                </Box>
+            </Show>
         </>
     )
 }

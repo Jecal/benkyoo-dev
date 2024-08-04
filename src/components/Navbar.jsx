@@ -5,13 +5,12 @@ import {
     Box,
     HStack,
     VStack,
-    Container,
     Image,
     Link,
     useColorMode,
     IconButton,
     Show,
-    Hide,
+    Spacer,
     Flex,
     useDisclosure,
     Drawer,
@@ -23,7 +22,7 @@ import {
     DrawerBody,
     Divider
 } from '@chakra-ui/react';
-import { SunIcon, MoonIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+import { SunIcon, MoonIcon, HamburgerIcon } from '@chakra-ui/icons'
 
 // router
 import { useNavigate } from 'react-router-dom';
@@ -57,47 +56,54 @@ function Navbar() {
 
     return (
         <>
-                <Hide below={'800px'}>
+            <Show above={'800px'}>
                 <Box
-                display={'inline-block'}
-                mt={'3vh'}
-                borderWidth={'1px'}
-                borderRadius={'lg'}
-                width={['80%']}
-            >
-                <HStack direction='row' spacing={'6vh'} h='7vh'>
-                    <Container onClick={logoClick} cursor='pointer' px={'1vw'}>
-                        <Image src={logo} h='3vh'/> 
-                    </Container> 
-                    <HStack spacing={'2vw'}>
-                        <Link px={'2vw'} _hover={{ textDecoration: 'none' }} onClick={notesClick}>
-                            notes
-                        </Link>
-                        <Link px={'2vw'} _hover={{ textDecoration: 'none' }}>
-                            dash
-                        </Link>
-                        <Link px={'2vw'} _hover={{ textDecoration: 'none' }}>
-                            community
-                        </Link>
-                    </HStack>
-                    <Container>
-                        <HStack spacing={'1vw'}>
-                            <IconButton 
-                                icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-                                onClick={toggleColorMode}
-                                variant={'ghost'}
-                                aria-label={'toggle color mode'}
-                            />
+                    display={'inline-block'}
+                    mt={'3vh'}
+                    borderWidth={1}
+                    borderRadius={'lg'}
+                    width={'80vw'}
+                >
+                    <Flex
+                        direction={'row'}
+                        alignItems={'center'}
+                        justifyContent={'space-between'}
+                        p={4}
+                    >
+                        <Box onClick={logoClick} cursor='pointer'>
+                            <Image src={logo} h={'3vh'}/>
+                        </Box>
+                        <Box>
+                            <Flex direction={'row'}>
+                                <Link px={'2vw'} _hover={{ textDecoration: 'none' }} onClick={notesClick}>
+                                    notes
+                                </Link>
+                                <Link px={'2vw'} _hover={{ textDecoration: 'none' }}>
+                                    dash
+                                </Link>
+                                <Link px={'2vw'} _hover={{ textDecoration: 'none' }}>
+                                    community
+                                </Link>
+                            </Flex>
+                        </Box>
+                        <Box>
+                            <Flex direction={'row'} alignItems={'center'}>
+                                <IconButton 
+                                    icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                                    onClick={toggleColorMode}
+                                    variant={'ghost'}
+                                    aria-label={'toggle color mode'}  
+                                />
+                                <Spacer />
                                 <>
                                     <SignInButton />
                                     <Profile />
                                 </>
-                        </HStack>
-                    </Container>
-                </HStack>
+                            </Flex>
+                        </Box>
+                    </Flex>
                 </Box>
-                </Hide>
-
+            </Show>
                 <Show below={'800px'}>
                     <Box
                         display={'inline-block'}
