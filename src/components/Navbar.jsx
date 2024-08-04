@@ -158,11 +158,8 @@ function Navbar() {
                                             <Link px={'2vw'} _hover={{ textDecoration: 'none' }} onClick={notesClick} alignSelf={'start'}>
                                                 <Text fontSize={'3xl'}>notes</Text>
                                             </Link>
-                                            <Link px={'2vw'} _hover={{ textDecoration: 'none' }} alignSelf={'start'}>
-                                                <Text fontSize={'3xl'}>dash</Text>
-                                            </Link>
-                                            <Link px={'2vw'} _hover={{ textDecoration: 'none' }} alignSelf={'start'}>
-                                                <Text fontSize={'3xl'}>community</Text>
+                                            <Link px={'2vw'} _hover={{ textDecoration: 'none' }} onClick={aboutClick} alignSelf={'start'}>
+                                                <Text fontSize={'3xl'}>about</Text>
                                             </Link>
                                             </VStack>
                                         </DrawerBody>
