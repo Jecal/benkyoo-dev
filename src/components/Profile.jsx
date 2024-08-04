@@ -34,6 +34,7 @@ const Profile = () => {
                         as={Avatar}
                         size='sm'
                         src={user.photoURL}
+                        ml={4}
                     />
                     <MenuList>
                         <MenuItem onClick={handleProfile}>

@@ -11,6 +11,7 @@ import LandingPage from './pages/LandingPage';
 import ErrorPage from './pages/ErrorPage';
 import ProfilePage from './pages/ProfilePage';
 import NoteDisplayPage from './pages/NoteDisplayPage';
+import AboutPage from './pages/AboutPage';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
   {
     path: '/notes',
     element: <NoteDisplayPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: '/about',
+    element: <AboutPage />,
     errorElement: <ErrorPage />
   }
 ]);

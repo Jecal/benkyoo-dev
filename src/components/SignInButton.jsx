@@ -17,7 +17,7 @@ const SignInButton = () => {
     return (
         !user && (
             <>
-                <Button colorScheme='purple' onClick={handleSignIn}>
+                <Button colorScheme='purple' onClick={handleSignIn} px={2}>
                     sign in
                 </Button>
             </>

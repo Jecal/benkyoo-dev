@@ -50,6 +50,10 @@ function Navbar() {
         navigate('/notes')
     };
 
+    const aboutClick = () => {
+        navigate('/about')
+    };
+
     // smaller navbar
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
@@ -78,11 +82,8 @@ function Navbar() {
                                 <Link px={'2vw'} _hover={{ textDecoration: 'none' }} onClick={notesClick}>
                                     notes
                                 </Link>
-                                <Link px={'2vw'} _hover={{ textDecoration: 'none' }}>
-                                    dash
-                                </Link>
-                                <Link px={'2vw'} _hover={{ textDecoration: 'none' }}>
-                                    community
+                                <Link px={'2vw'} _hover={{ textDecoration: 'none' }} onClick={aboutClick}>
+                                    about
                                 </Link>
                             </Flex>
                         </Box>
