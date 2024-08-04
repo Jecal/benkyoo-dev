@@ -130,7 +130,7 @@ const MainContent = () => {
             </Show>
             <Hide above={'lg'}>
                 <VStack spacing={'2vh'}>
-                    <Box w={'xl'}>
+                    <Box w={'90vw'}>
                         <Box
                             borderWidth={1}
                             borderRadius={'lg'}
@@ -213,7 +213,7 @@ const Socials = () => {
             </Show>
             <Hide above={'lg'}>
                 <Box
-                    w={'xl'}
+                    w={'90vw'}
                     borderWidth={1}
                     borderRadius={'lg'}
                 >
